@@ -1,16 +1,53 @@
-## Hi there 👋
+<h1 align="center">👋 Hi, I'm Thiago!</h1>
 
-<!--
-**Thi0x40go/Thi0x40go** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+<p align="center">
+A passionate Web Developer focused on clean code, best practices, and automation.
+</p>
 
-Here are some ideas to get you started:
+---
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## 🚀 About Me
+
+- 🔭 I’m currently working as a Web Developer.
+- 💻 Minimalist tool lover — mainly using **Neovim** and **Zed**.
+- 🛠️ Focused on backend, frontend, automation, and containerized environments.
+
+---
+
+## 🧠 Tech Stack & Tools
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=php,lua,js,ts,nextjs,vue,docker,githubactions" />
+</p>
+
+---
+
+## 🛠️ Editors & Tools I Use
+
+<p align="center">
+  <img src="https://skillicons.dev/icons?i=neovim,zed" />
+</p>
+
+---
+
+## 🌍 Where to Find Me
+
+<p align="center">
+  <a href="https://github.com/Thi0x40go">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white"/>
+  </a>
+  <a href="https://www.linkedin.com/in/thiagup/">
+    <img src="https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white"/>
+  </a>
+</p>
+
+---
+
+## ⚙️ GitHub Stats
+
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=Thi0x40go&show_icons=true&theme=tokyonight" alt="stats"/>
+</p>
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=Thi0x40go&theme=tokyonight" alt="streak"/>
+</p>
