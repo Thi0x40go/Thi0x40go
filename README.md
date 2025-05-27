@@ -16,7 +16,7 @@ A passionate Web Developer focused on clean code, best practices, and automation
 
 ## 🧠 Tech Stack & Tools
 
-<p align="center">
+<p align="start">
   <img src="https://skillicons.dev/icons?i=php,lua,js,ts,nextjs,vue,docker,githubactions" />
 </p>
 
@@ -24,7 +24,7 @@ A passionate Web Developer focused on clean code, best practices, and automation
 
 ## 🛠️ Editors & Tools I Use
 
-<p align="center">
+<p align="start">
   <img src="https://skillicons.dev/icons?i=neovim,zed" />
 </p>
 
