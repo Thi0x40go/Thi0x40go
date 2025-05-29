@@ -1,6 +1,6 @@
-<h1 align="center">👋 Hi, I'm Thiago!</h1>
+<h1>👋 Hi, I'm Thiago!</h1>
 
-<p align="center">
+<p>
 Specialized in high-performance web development, SEO, accessibility (a11y), and scalable solutions.<br>
 I build fast, accessible, and SEO-optimized websites with clean, maintainable code — always following best practices and modern development standards.
 </p>
