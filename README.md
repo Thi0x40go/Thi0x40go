@@ -2,8 +2,10 @@
 
 <p>
 Specialized in high-performance web development, SEO, accessibility (a11y), and scalable solutions.<br>
-I build fast, accessible, and SEO-optimized websites with clean, maintainable code — always following best practices and modern development standards.
+I build fast, accessible, and SEO-optimized websites with clean, maintainable code — always following best practices and modern development standards.<br>
+Currently learning Go (Golang) to expand my back-end development skills.
 </p>
+
 
 ---
 ## 💻 Tech Stack
