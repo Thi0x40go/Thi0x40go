@@ -124,10 +124,10 @@ end
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePre" }, {
   pattern = "*.cs",
   callback = function()
-    if not vim.bo.readonly and vim.bo.modifiable then
-      -- Remove BOM if it exists
+    if vim.bo.modifiable and vim.bo.buftype == "" and not vim.bo.readonly then
+      local pos = vim.fn.getpos(".")
       vim.cmd("silent! %s/\\%uFEFF//g")
-      -- Ensure nobomb is set to prevent it from coming back on save
+      vim.fn.setpos(".", pos)
       vim.opt_local.bomb = false
     end
   end,

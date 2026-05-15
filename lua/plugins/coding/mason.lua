@@ -12,6 +12,7 @@ return {
         "shellcheck",
         "shfmt",
         "flake8",
+        "graphql-language-service-cli",
         "bash-language-server",
         "chrome-debug-adapter",
         "css-lsp",

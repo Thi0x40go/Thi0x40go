@@ -22,3 +22,16 @@ vim.keymap.set("n", "<leader>ct", function()
 end, { desc = "Test .NET Project" })
 
 vim.keymap.set("n", "<leader>cr", "<cmd>OverseerRun<cr>", { desc = "Run Current File (Overseer)" })
+
+-- Guia de Comandos (Cheatsheet)
+vim.keymap.set("n", "<leader>?", function()
+  Snacks.win({
+    file = vim.fn.stdpath("config") .. "/CHEATSHEET.md",
+    width = 0.6,
+    height = 0.7,
+    wo = {
+      conceallevel = 3,
+      concealcursor = "nvc",
+    },
+  })
+end, { desc = "Ver Guia de Comandos" })

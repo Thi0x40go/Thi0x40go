@@ -9,28 +9,31 @@ return {
       require("gemini").setup(opts)
     end,
     keys = {
-      { "<leader>gb", "<cmd>GeminiBuild<cr>", desc = "Build Gemini Bridge" },
-      { "<leader>gr", "<cmd>GeminiRestartServer<cr>", desc = "Restart Gemini Server" },
-      { 
-        "<leader>ag", 
+      { "<leader>gb", "<cmd>GeminiBuild<cr>", desc = "Compilar Ponte do Gemini" },
+      { "<leader>gr", "<cmd>GeminiRestartServer<cr>", desc = "Reiniciar Servidor Gemini" },
+      {
+        "<leader>ag",
         function()
           Snacks.terminal.toggle("gemini", { win = { position = "float" } })
-        end, 
-        desc = "Toggle Gemini CLI (Floating)" 
+        end,
+        desc = "Gemini CLI (Flutuante)",
+        mode = { "n", "t" }
       },
-      { 
-        "<leader>ah", 
+      {
+        "<leader>ah",
         function()
           Snacks.terminal.toggle("gemini", { win = { position = "bottom" } })
-        end, 
-        desc = "Toggle Gemini CLI (Horizontal)" 
+        end,
+        desc = "Gemini CLI (Horizontal)",
+        mode = { "n", "t" }
       },
-      { 
-        "<leader>av", 
+      {
+        "<leader>av",
         function()
           Snacks.terminal.toggle("gemini", { win = { position = "right" } })
-        end, 
-        desc = "Toggle Gemini CLI (Vertical)" 
+        end,
+        desc = "Gemini CLI (Vertical)",
+        mode = { "n", "t" }
       },
     },
   },

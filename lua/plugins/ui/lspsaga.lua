@@ -19,12 +19,15 @@ return {
       })
     end,
     keys = {
-      { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Hover Documentation (Saga)" },
-      { "<leader>ca", "<cmd>Lspsaga code_action<cr>", mode = { "n", "v" }, desc = "Code Action (Saga)" },
-      { "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Line Diagnostics (Saga)" },
-      { "gh", "<cmd>Lspsaga finder<cr>", desc = "LSP Finder (Saga)" },
-      { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "Peek Definition (Saga)" },
-      { "<leader>cr", "<cmd>Lspsaga rename<cr>", desc = "Rename (Saga)" },
+      { "K", "<cmd>Lspsaga hover_doc<cr>", desc = "Documentação (Hover)" },
+      { "<leader>ca", "<cmd>Lspsaga code_action<cr>", mode = { "n", "v" }, desc = "Ações de Código" },
+      { "<leader>cd", "<cmd>Lspsaga show_line_diagnostics<cr>", desc = "Ver Erros da Linha" },
+      { "gh", "<cmd>Lspsaga finder<cr>", desc = "Procurar Usos/Referências" },
+      { "gr", "<cmd>Lspsaga finder ref<cr>", desc = "Encontrar Usos (Find Usages)" },
+      { "gp", "<cmd>Lspsaga peek_definition<cr>", desc = "Espiar Definição" },
+      { "<leader>cs", "<cmd>Lspsaga outline<cr>", desc = "Ver Estrutura do Código" },
+      { "<leader>rn", "<cmd>Lspsaga rename<cr>", desc = "Renomear" },
+      { "<leader>cr", false }, -- Desativa o atalho original do LazyVim para não conflitar
     },
   },
 }

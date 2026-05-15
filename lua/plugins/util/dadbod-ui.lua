@@ -10,6 +10,9 @@ return {
     'DBUIAddConnection',
     'DBUIFindBuffer',
   },
+  keys = {
+    { "<leader>D", "<cmd>DBUIToggle<cr>", desc = "Gerenciar Banco de Dados" },
+  },
   init = function()
     -- Your DBUI configuration
     vim.g.db_ui_use_nerd_fonts = 1

@@ -37,6 +37,7 @@ return {
           enabled = false,
         },
         pyright = {},
+        graphql = {},
         twiggy = {
           filetypes = { "twig", "html.twig", "html", "htmldjango" },
         },

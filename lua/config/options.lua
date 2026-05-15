@@ -18,7 +18,18 @@ g.autoformat = false
 o.shell = "/bin/bash"
 o.shellcmdflag = "-ic"
 
--- -- Desativa o texto de erro/aviso que aparece escrito ao lado do código (virtual text)
--- vim.diagnostic.config({
---   virtual_text = false,
--- })
+-- Desativa Inlay Hints globalmente (Padrão LazyVim)
+vim.g.lazyvim_lsp_inlay_hint = false
+
+-- Desativa o texto de erro/aviso que aparece escrito ao lado do código (virtual text)
+vim.diagnostic.config({
+  virtual_text = false,
+})
+
+-- Garantia extra para desativar Inlay Hints e evitar erros de 'col: out of range'
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
+  end,
+})
+
