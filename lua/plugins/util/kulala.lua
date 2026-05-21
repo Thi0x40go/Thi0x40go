@@ -10,6 +10,7 @@ return {
       { "<leader>Re", function() require("kulala").set_selected_env() end, desc = "Selecionar ambiente (Env)" },
       { "<leader>Ri", function() require("kulala").inspect() end, desc = "Inspecionar requisição (cURL)" },
       { "<leader>Rc", function() require("kulala").copy() end, desc = "Copiar como cURL" },
+      { "<leader>Rg", function() require("kulala").download_graphql_schema() end, desc = "Baixar Schema GraphQL" },
     },
     opts = {
       -- Configurações visuais

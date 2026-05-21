@@ -1,10 +1,11 @@
 # 🚀 Manual de Elite - Neovim
 
-### 🤖 Inteligência Artificial (Gemini CLI)
-*O Gemini "vê" o arquivo que você está editando e onde está o seu cursor.*
-- `<leader>ag` : **Janela Flutuante** (Dúvidas rápidas sem mudar o layout)
-- `<leader>ah` : **Modo Horizontal** (Bom para ler logs enquanto conversa)
-- `<leader>av` : **Modo Vertical** (Ideal para manter o chat aberto enquanto coda ao lado)
+### 🤖 Inteligência Artificial (Gemini & Kiro)
+*IA observando seu código em tempo real.*
+- `<leader>ag` : **Gemini** (Flutuante)
+- `<leader>ak` : **Kiro CLI** (Flutuante - Novo Plugin Nativo)
+- `<leader>ah` : Gemini (Horizontal)
+- `<leader>av` : Gemini (Vertical)
 - `<leader>Ai` : **Liga/Desliga** o auto-completar da IA (Ollama/Qwen)
 - `Alt + y`    : **Aceitar** sugestão da IA (Texto cinza)
 - `Alt + n/p`  : Ver **Próxima / Anterior** sugestão
@@ -19,7 +20,7 @@
 ### 🎯 C# & .NET
 - `<leader>cR` : **Rodar Projeto** (Detecta o seu `.csproj` e executa)
 - `<leader>sc` : **REPL Interativo** (Uma "calculadora" de C# para testar lógica rápida)
-- `<leader>sl" : Envia a linha atual para o REPL
+- `<leader>sl` : Envia a linha atual para o REPL
 - `<leader>sv` : Envia o bloco selecionado (Modo Visual) para o REPL
 
 ### 🧪 Testes (Neotest)
@@ -40,6 +41,7 @@
 - `<leader>cx` : **Menu de Execução** (Roda arquivo Java/JS solto ou Dev Servers)
 - `<leader>rj` : **Spring Quick Request** (Gera um teste HTTP de um @GetMapping)
 - `<leader>Rr` : **Executar Requisição** HTTP (Kulala - em arquivos .http)
+- `<leader>Rg` : **Baixar Schema GraphQL** (Habilita autocomplete em queries)
 - `<leader>Re` : **Mudar Ambiente** (Trocar entre Local, Dev, Prod)
 
 ### 🗄️ Banco de Dados & Docker
@@ -51,7 +53,7 @@
 - `<leader>gD` : Fechar Visão de Diff
 - `<leader>ua` : **Ligar/Desligar Auto-Save** (Salva arquivos automaticamente ao digitar)
 - `<leader>qs` : **Restaurar Sessão** (Abre as últimas abas e arquivos que você fechou)
-- `<leader>fp` : **Mudar de Projeto** (Abre a lista de projetos detectados)
+- `<leader>fp" : **Mudar de Projeto** (Abre a lista de projetos detectados)
 - `<leader>?`  : **Este Guia**
 
 ### 📓 Obsidian (Anotações)
