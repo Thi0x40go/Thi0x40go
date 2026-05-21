@@ -120,13 +120,16 @@ M.setup = function(opts)
 end
 
 -- Return the module table
--- C# BOM Fix: Remove <feff> (Byte Order Mark) automatically
+-- C# BOM Fix: Remove <feff> (Byte Order Mark) automaticamente
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePre" }, {
   pattern = "*.cs",
   callback = function()
-    if vim.bo.modifiable and vim.bo.buftype == "" and not vim.bo.readonly then
+    -- Só executa se for um arquivo real, editável e com nome válido
+    if vim.bo.modifiable and vim.bo.buftype == "" and vim.fn.expand("%") ~= "" then
       local pos = vim.fn.getpos(".")
-      vim.cmd("silent! %s/\\%uFEFF//g")
+      pcall(function()
+        vim.cmd("silent! %s/\\%uFEFF//g")
+      end)
       vim.fn.setpos(".", pos)
       vim.opt_local.bomb = false
     end

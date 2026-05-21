@@ -3,20 +3,25 @@ return {
     "milanglacier/minuet-ai.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      local api_key = os.getenv("GEMINI_API_KEY")
-      if not api_key then
-        vim.notify("Minuet AI: GEMINI_API_KEY não encontrada!", vim.log.levels.ERROR)
-      end
-
       require("minuet").setup({
         provider = "gemini",
         provider_options = {
           gemini = {
             model = "gemini-2.5-flash",
-            system = "Você é um auto-completar ultra-curto. Forneça APENAS a continuação imediata da palavra ou linha. Proibido gerar funções, blocos ou comentários.",
             max_tokens = 32,
             stream = true,
           },
+          -- openai_fim_compatible = {
+          --   model = "qwen2.5-coder:3b",
+          --   end_point = "http://127.0.0.1:11434/v1/completions",
+          --   api_key = "TERM",
+          --   name = "Ollama",
+          --   stream = false,
+          --   optional = {
+          --     max_tokens = 24,
+          --     temperature = 0.2,
+          --   },
+          -- }
         },
         virtualtext = {
           enable = true,
@@ -29,7 +34,7 @@ return {
           },
         },
         throttle = 1000, -- Aumentado para estabilidade
-        debounce = 400,
+        debounce = 200,
       })
     end,
   },

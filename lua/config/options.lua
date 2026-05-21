@@ -18,18 +18,17 @@ g.autoformat = false
 o.shell = "/bin/bash"
 o.shellcmdflag = "-ic"
 
--- Desativa Inlay Hints globalmente (Padrão LazyVim)
+-- Desativa Inlay Hints globalmente (Padrão LazyVim e Neovim)
 vim.g.lazyvim_lsp_inlay_hint = false
+
+-- FORÇA BRUTA: Sobrescreve a função de Inlay Hint para não fazer nada
+-- Isso impede que erros de 'col: out of range' apareçam na tela
+if vim.lsp.inlay_hint then
+  vim.lsp.inlay_hint.enable = function() end
+end
 
 -- Desativa o texto de erro/aviso que aparece escrito ao lado do código (virtual text)
 vim.diagnostic.config({
   virtual_text = false,
-})
-
--- Garantia extra para desativar Inlay Hints e evitar erros de 'col: out of range'
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(args)
-    vim.lsp.inlay_hint.enable(false, { bufnr = args.buf })
-  end,
 })
 

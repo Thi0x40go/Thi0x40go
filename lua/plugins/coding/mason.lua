@@ -30,6 +30,7 @@ return {
         "luaformatter",
         "markdownlint",
         "roslyn",
+        "vscode-spring-boot-tools",
         "typescript-language-server",
       },
     },

@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>ct", function()
   end
 end, { desc = "Test .NET Project" })
 
-vim.keymap.set("n", "<leader>cr", "<cmd>OverseerRun<cr>", { desc = "Run Current File (Overseer)" })
+vim.keymap.set("n", "<leader>cx", "<cmd>OverseerRun<cr>", { desc = "Executar (Overseer)" })
 
 -- Guia de Comandos (Cheatsheet)
 vim.keymap.set("n", "<leader>?", function()
@@ -35,3 +35,13 @@ vim.keymap.set("n", "<leader>?", function()
     },
   })
 end, { desc = "Ver Guia de Comandos" })
+
+-- Atalhos para o Layout Edgy
+vim.keymap.set("n", "<leader>be", "<cmd>Neotree buffers<cr>", { desc = "Ver Arquivos Abertos (Buffers)" })
+vim.keymap.set("n", "<leader>ge", "<cmd>Neogit<cr>", { desc = "Git Status (Neogit)" })
+
+-- Quick Request (Spring, Express, ASP.NET)
+vim.keymap.set("n", "<leader>rj", function()
+  require("util.quick_request").create_request()
+end, { desc = "Gerar Requisição API (Kulala)" })
+

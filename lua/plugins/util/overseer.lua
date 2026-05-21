@@ -29,6 +29,7 @@ return {
       "builtin",
       "user.run_file",
       "user.frontend_dev",
+      "user.java_project",
       "user.auto_test",
       "user.build_project",
       "user.input_test",

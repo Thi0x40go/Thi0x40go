@@ -13,6 +13,8 @@ return {
       cmd = { "node", file }
     elseif vim.bo.filetype == "lua" then
       cmd = { "lua", file }
+    elseif vim.bo.filetype == "java" then
+      cmd = { "java", file }
     elseif vim.bo.filetype == "cs" then
       cmd = { "dotnet", "run" }
       return {
