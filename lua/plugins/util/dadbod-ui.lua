@@ -1,5 +1,6 @@
 return {
   'kristijanhusak/vim-dadbod-ui',
+  enabled = false,
   dependencies = {
     { 'tpope/vim-dadbod',                     lazy = true },
     { 'kristijanhusak/vim-dadbod-completion', ft = { 'sql', 'mysql', 'plsql' }, lazy = true }, -- Optional
@@ -11,7 +12,7 @@ return {
     'DBUIFindBuffer',
   },
   keys = {
-    { "<leader>D", "<cmd>DBUIToggle<cr>", desc = "Gerenciar Banco de Dados" },
+    { "<leader>Dd", "<cmd>DBUIToggle<cr>", desc = "DBUI" },
   },
   init = function()
     -- Your DBUI configuration

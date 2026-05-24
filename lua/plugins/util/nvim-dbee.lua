@@ -4,6 +4,15 @@ return {
     dependencies = {
       "MunifTanjim/nui.nvim",
     },
+    keys = {
+      {
+        "<leader>D",
+        function()
+          require("dbee").toggle()
+        end,
+        desc = "DBee",
+      },
+    },
     build = function()
       -- Install tries to automatically detect the install method.
       -- if it fails, try calling it with one of these parameters:
