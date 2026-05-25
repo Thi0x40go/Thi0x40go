@@ -40,8 +40,3 @@ end, { desc = "Ver Guia de Comandos" })
 vim.keymap.set("n", "<leader>be", "<cmd>Neotree buffers<cr>", { desc = "Ver Arquivos Abertos (Buffers)" })
 vim.keymap.set("n", "<leader>ge", "<cmd>Neogit<cr>", { desc = "Git Status (Neogit)" })
 
--- Quick Request (Spring, Express, ASP.NET)
-vim.keymap.set("n", "<leader>rj", function()
-  require("util.quick_request").create_request()
-end, { desc = "Gerar Requisição API (Kulala)" })
-

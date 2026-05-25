@@ -32,3 +32,21 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
+-- Modern Window Borders (Splits)
+o.fillchars = {
+  horiz = "─",
+  horizup = "┴",
+  horizdown = "┬",
+  vert = "│",
+  vertleft = "┤",
+  vertright = "├",
+  verthoriz = "┼",
+  eob = " ", -- Esconde o ~ no final do buffer
+}
+
+-- Bordas arredondadas para janelas flutuantes (LSP e diagnósticos)
+local border = "rounded"
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signatureHelp, { border = border })
+vim.diagnostic.config({ float = { border = border } })
+

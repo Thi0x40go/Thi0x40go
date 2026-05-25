@@ -14,7 +14,6 @@ return {
         "flake8",
         "graphql-language-service-cli",
         "bash-language-server",
-        "chrome-debug-adapter",
         "css-lsp",
         "debugpy",
         "deno",
@@ -34,5 +33,20 @@ return {
         "typescript-language-server",
       },
     },
-  }
+  },
+  {
+    "mason-org/mason-lspconfig.nvim",
+    opts = {
+      -- Impede que o mason-lspconfig tente encontrar servidores para o dashboard do snacks
+      -- Isso resolve o erro "No LSP servers found for filetype snacks_dashboard"
+      handlers = {
+        function(server_name)
+          if vim.bo.filetype == "snacks_dashboard" then
+            return
+          end
+          require("lspconfig")[server_name].setup({})
+        end,
+      },
+    },
+  },
 }

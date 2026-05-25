@@ -8,29 +8,29 @@ return {
       "nvim-lua/plenary.nvim",
     },
     keys = {
-      { "<leader>ot", "<cmd>ObsidianTomorrow<cr>", desc = "Obsidian: Amanhã (Tomorrow note)" },
-      { "<leader>od", "<cmd>ObsidianToday<cr>", desc = "Obsidian: Hoje (Daily note)" },
-      { "<leader>oy", "<cmd>ObsidianYesterday<cr>", desc = "Obsidian: Ontem (Yesterday note)" },
-      { "<leader>oc", "<cmd>ObsidianTemplate<cr>", desc = "Obsidian: Completar com Template" },
-      { "<leader>of", "<cmd>ObsidianQuickSwitch<cr>", desc = "Obsidian: Pular para nota (Quick Switch)" },
-      { "<leader>os", "<cmd>ObsidianSearch<cr>", desc = "Obsidian: Procurar nas notas" },
+      { "<leader>nt", "<cmd>ObsidianTomorrow<cr>", desc = "󰔗  Amanhã (Tomorrow)" },
+      { "<leader>nd", "<cmd>ObsidianToday<cr>", desc = "󰃭  Hoje (Daily Note)" },
+      { "<leader>ny", "<cmd>ObsidianYesterday<cr>", desc = "󰔒  Ontem (Yesterday)" },
+      { "<leader>nc", "<cmd>ObsidianTemplate<cr>", desc = "󰏫  Completar com Template" },
+      { "<leader>nf", "<cmd>ObsidianQuickSwitch<cr>", desc = "󰈞  Pular para Nota" },
+      { "<leader>ns", "<cmd>ObsidianSearch<cr>", desc = "󰍉  Procurar nas Notas" },
       {
-        "<leader>oP",
+        "<leader>nP",
         function()
           vim.cmd("ObsidianPasteImg " .. vim.fn.input("Image Name: "))
         end,
-        desc = "Obsidian: Colar Imagem",
+        desc = "󰄄  Colar Imagem",
       },
     },
     opts = {
       completion = {
-        nvim_cmp = true,
+        nvim_cmp = false, -- Desativado para evitar erro 'module cmp not found'
         min_chars = 2,
       },
       workspaces = {
         {
           name = "personal",
-          path = "~/Documentos/Obsidian Vault/",
+          path = "~/Documents/Obsidian Vault/",
         },
       },
       templates = {

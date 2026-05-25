@@ -16,11 +16,29 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     opts = function(_, opts)
+      -- Garante que opts.cmd seja uma tabela e adicione flags necessárias
+      opts.cmd = opts.cmd or {}
+      
+      -- 0. Ignora validação de versão do Java pelo wrapper do Mason
+      -- Evita o erro "jdtls requires at least Java 21" quando o sistema já tem Java 21+
+      local has_no_validate = false
+      for _, arg in ipairs(opts.cmd) do
+        if arg == "--no-validate-java-version" then has_no_validate = true break end
+      end
+      if not has_no_validate then
+        table.insert(opts.cmd, "--no-validate-java-version")
+      end
+
       -- 1. Ativa suporte a Lombok (Essencial para Spring Boot)
       local lombok_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls/lombok.jar"
       if vim.fn.filereadable(lombok_path) == 1 then
-        opts.cmd = opts.cmd or {}
-        table.insert(opts.cmd, "--javaagent:" .. lombok_path)
+        local has_lombok = false
+        for _, arg in ipairs(opts.cmd) do
+          if arg:find("--javaagent") then has_lombok = true break end
+        end
+        if not has_lombok then
+          table.insert(opts.cmd, "--javaagent:" .. lombok_path)
+        end
       end
 
       -- 2. Carrega as Extensões do Spring Boot no JDTLS
@@ -47,6 +65,8 @@ return {
           checkOnSave = true,
         },
       }
+
+      return opts
     end,
   },
 }

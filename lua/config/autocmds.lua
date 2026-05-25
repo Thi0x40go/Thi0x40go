@@ -8,6 +8,27 @@ vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
   end,
 })
 
+-- Função para aplicar as cores das bordas
+local function set_window_borders()
+  -- Borda da janela ativa (Azul moderno e fino)
+  vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#3d59a1", bold = false })
+  -- Borda da janela inativa (Mais sutil/escuro)
+  vim.api.nvim_set_hl(0, "WinSeparatorNC", { fg = "#1f2335", bold = false })
+  -- Força o link para garantir compatibilidade
+  vim.api.nvim_set_hl(0, "VertSplit", { link = "WinSeparator" })
+
+  -- Opcional: Escurece levemente o fundo da janela inativa para destacar a ativa
+  vim.api.nvim_set_hl(0, "NormalNC", { bg = "#16161e" })
+end
+
+-- Aplica ao carregar o arquivo
+set_window_borders()
+
+-- Reaplica sempre que o tema mudar
+vim.api.nvim_create_autocmd("ColorScheme", {
+  callback = set_window_borders,
+})
+
 
 vim.api.nvim_create_autocmd("BufReadPost", {
   callback = function()

@@ -5,22 +5,22 @@ return {
     {
       "<leader>ow",
       "<cmd>OverseerToggle<cr>",
-      desc = "Lista de tarefas",
+      desc = "󱗼  Lista de Tarefas",
     },
     {
       "<leader>oo",
       "<cmd>OverseerRun<cr>",
-      desc = "Executar tarefa",
+      desc = "󰐊  Executar Tarefa",
     },
     {
       "<leader>ot",
       "<cmd>OverseerTaskAction<cr>",
-      desc = "Ação da tarefa",
+      desc = "󰓅  Ação da Tarefa",
     },
     {
       "<leader>os",
       "<cmd>OverseerShell<cr>",
-      desc = "Shell interativo",
+      desc = "󱆃  Shell Interativo",
     },
   },
   opts = {
