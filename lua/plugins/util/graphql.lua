@@ -1,7 +1,7 @@
 return {
   {
     "Thi0x40go/graphql-explorer.nvim",
-    dir = "~/scratch/graphql-explorer.nvim/",
+    -- dir = "~/scratch/graphql-explorer.nvim/",
     opts = {
       connections = {
         {
@@ -11,7 +11,7 @@ return {
         },
         {
           name = "Local Dev",
-          url = "http://localhost:4000/",
+          url = "http://localhost:8080/",
           headers = {
             ["Authorization"] = "Bearer seu-token-aqui"
           }

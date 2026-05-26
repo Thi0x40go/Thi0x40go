@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     "milanglacier/minuet-ai.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()

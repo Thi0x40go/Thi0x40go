@@ -10,7 +10,7 @@ return {
         {
           ft = "neo-tree",
           title = "Projeto",
-          size = { width = 30 },
+          size = { width = 40 },
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "filesystem"
           end,
@@ -18,7 +18,7 @@ return {
         {
           ft = "neo-tree",
           title = "Buffers",
-          size = { width = 30 },
+          size = { width = 40 },
           filter = function(buf)
             return vim.b[buf].neo_tree_source == "buffers"
           end,

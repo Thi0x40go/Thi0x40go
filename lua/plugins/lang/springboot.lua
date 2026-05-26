@@ -6,6 +6,34 @@ return {
       "neovim/nvim-lspconfig",
       "nvim-telescope/telescope.nvim",
     },
+    opts = function()
+      local java_cmd = "java"
+      local home = os.getenv("HOME")
+      if home then
+        -- Busca um executável Java 21+ instalado pelo mise
+        local mise_java_dirs = vim.fn.glob(home .. "/.local/share/mise/installs/java/*", true, true)
+        table.sort(mise_java_dirs, function(a, b) return a > b end)
+        for _, dir in ipairs(mise_java_dirs) do
+          local ver_str = dir:match("([^/]+)$")
+          if ver_str then
+            local main_ver = ver_str:match("-(%d+)") or ver_str:match("^(%d+)")
+            if main_ver then
+              local ver_num = tonumber(main_ver)
+              if ver_num and ver_num >= 21 then
+                local bin = dir .. "/bin/java"
+                if vim.fn.executable(bin) == 1 then
+                  java_cmd = bin
+                  break
+                end
+              end
+            end
+          end
+        end
+      end
+      return {
+        java_cmd = java_cmd,
+      }
+    end,
     config = function(_, opts)
       require("spring_boot").setup(opts)
       require("spring_boot").init_lsp_commands()

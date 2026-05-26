@@ -1,5 +1,6 @@
 return {
   {
+    enabled = false,
     "vaijab/gemini-cli.nvim",
     build = ":GeminiBuild",
     opts = {
