@@ -20,6 +20,29 @@ return {
     -- Maven Project
     if vim.fn.filereadable("pom.xml") == 1 then
       local mvn = get_mvn_cmd()
+      
+      -- Coleta sub-módulos Maven dinamicamente
+      local choices = { "" }
+      local poms = vim.fn.glob("*/pom.xml", true, true)
+      for _, pom_path in ipairs(poms) do
+        local module_name = pom_path:match("([^/]+)/pom.xml$")
+        if module_name then
+          table.insert(choices, module_name)
+        end
+      end
+
+      local default_module = ""
+      for _, choice in ipairs(choices) do
+        if choice == "apphealth-back" then
+          default_module = "apphealth-back"
+          break
+        end
+      end
+      if default_module == "" and #choices > 1 then
+        default_module = choices[2]
+      end
+
+      -- 1. Standard Run
       table.insert(tasks, {
         name = "Java: Maven Run (Spring Boot)",
         builder = function()
@@ -29,6 +52,61 @@ return {
           }
         end,
       })
+
+      -- 2. Run with Args (Generic)
+      table.insert(tasks, {
+        name = "Java: Maven Run (Spring Boot) with Args",
+        params = {
+          module = {
+            type = "enum",
+            name = "Module (-pl)",
+            choices = choices,
+            default = default_module,
+            desc = "Select maven sub-module to run",
+          },
+          args = {
+            type = "string",
+            name = "Arguments",
+            default = default_module == "apphealth-back" and "--application.amazon.sqs-consumer.enabled=false" or "",
+            desc = "e.g., --application.amazon.sqs-consumer.enabled=false",
+          },
+        },
+        builder = function(params)
+          local run_cmd = { mvn, "spring-boot:run" }
+          if params.module and params.module ~= "" then
+            table.insert(run_cmd, "-pl")
+            table.insert(run_cmd, params.module)
+          end
+          if params.args and params.args ~= "" then
+            table.insert(run_cmd, "-Dspring-boot.run.arguments=" .. params.args)
+          end
+          return {
+            cmd = run_cmd,
+            components = { { "on_output_quickfix", open_on_exit = "failure" }, "default" },
+          }
+        end,
+      })
+
+      -- 3. Dedicated task for apphealth-back if it exists
+      if vim.fn.filereadable("apphealth-back/pom.xml") == 1 then
+        table.insert(tasks, {
+          name = "Java: Maven Run apphealth-back (No SQS)",
+          builder = function()
+            return {
+              cmd = {
+                mvn,
+                "spring-boot:run",
+                "-pl",
+                "apphealth-back",
+                "-Dspring-boot.run.arguments=--application.amazon.sqs-consumer.enabled=false",
+              },
+              components = { { "on_output_quickfix", open_on_exit = "failure" }, "default" },
+            }
+          end,
+        })
+      end
+
+      -- 4. Clean Install
       table.insert(tasks, {
         name = "Java: Maven Clean Install",
         builder = function()
