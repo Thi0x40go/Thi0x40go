@@ -31,6 +31,7 @@ return {
         "roslyn",
         "vscode-spring-boot-tools",
         "typescript-language-server",
+        "sqls",
       },
     },
   },

@@ -14,6 +14,11 @@ o.relativenumber = false
 vim.g.lazyvim_prettier_needs_config = false
 g.autoformat = false
 
+-- Conexões de banco de dados (usado pelo vim-dadbod / LazyVim extra lang.sql)
+g.dbs = {
+  { name = "apphealth-local", url = "postgresql://apphealth:apphealth@localhost:5432/apphealth" },
+}
+
 -- Configuração para usar bash interativo e carregar .bashrc/aliases
 o.shell = "/bin/bash"
 o.shellcmdflag = "-ic"

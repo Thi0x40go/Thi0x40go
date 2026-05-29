@@ -38,6 +38,9 @@ return {
         },
         pyright = {},
         graphql = {},
+        sqls = {
+          cmd = { "sqls", "-config", vim.fn.expand("~/.config/sqls/config.yml") },
+        },
         twiggy = {
           filetypes = { "twig", "html.twig", "html", "htmldjango" },
         },
