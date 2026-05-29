@@ -27,14 +27,14 @@ return {
         chars = {
           "│", -- Caractere limpo para indentação normal
         },
-        style = {
-          "#E06C75",
-          "#E5C07B",
-          "#98C379",
-          "#56B6C2",
-          "#61AFEF",
-          "#C678DD",
-        },
+        -- style = {
+        --   "#E06C75",
+        --   "#E5C07B",
+        --   "#98C379",
+        --   "#56B6C2",
+        --   "#61AFEF",
+        --   "#C678DD",
+        -- },
       },
       line_num = {
         enable = true,
@@ -53,4 +53,3 @@ return {
     })
   end,
 }
-
