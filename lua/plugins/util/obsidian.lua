@@ -30,8 +30,12 @@ return {
       workspaces = {
         {
           name = "personal",
-          path = "~/Documents/Obsidian Vault/",
+          path = "~/Documents/Vault/",
         },
+      },
+      daily_notes = {
+        folder = "Notas Diarias",
+        date_format = "%Y-%m-%d",
       },
       templates = {
         folder = "templates",
