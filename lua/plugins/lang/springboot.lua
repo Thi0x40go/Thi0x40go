@@ -44,8 +44,34 @@ return {
   {
     "mfussenegger/nvim-jdtls",
     opts = function(_, opts)
+      -- Força Java 22 do mise para o JDTLS (ignora versão local do projeto)
+      local java22_home = vim.fn.expand("~/.local/share/mise/installs/java/22")
+      if vim.fn.isdirectory(java22_home) == 1 then
+        vim.env.JAVA_HOME = java22_home
+        vim.env.PATH = java22_home .. "/bin:" .. vim.env.PATH
+      end
+
       -- Garante que opts.cmd seja uma tabela e adicione flags necessárias
       opts.cmd = opts.cmd or {}
+
+      -- Força o java_home explicitamente no comando do jdtls
+      if vim.fn.isdirectory(java22_home) == 1 then
+        -- Remove qualquer --java-executable existente
+        local filtered = {}
+        local skip_next = false
+        for _, arg in ipairs(opts.cmd) do
+          if skip_next then
+            skip_next = false
+          elseif arg == "--java-executable" then
+            skip_next = true
+          else
+            table.insert(filtered, arg)
+          end
+        end
+        opts.cmd = filtered
+        table.insert(opts.cmd, "--java-executable")
+        table.insert(opts.cmd, java22_home .. "/bin/java")
+      end
       
       -- 0. Ignora validação de versão do Java pelo wrapper do Mason
       -- Evita o erro "jdtls requires at least Java 21" quando o sistema já tem Java 21+

@@ -1,5 +1,6 @@
 return {
   "GustavEikaas/easy-dotnet.nvim",
+  enabled = false,
   -- 'nvim-telescope/telescope.nvim' or 'ibhagwan/fzf-lua' or 'folke/snacks.nvim'
   -- are highly recommended for a better experience
   dependencies = { "nvim-lua/plenary.nvim", 'mfussenegger/nvim-dap', 'folke/snacks.nvim', },

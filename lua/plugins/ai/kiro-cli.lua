@@ -1,11 +1,11 @@
 return {
   {
     "Thi0x40go/kiro-cli.nvim",
-    -- dir = "~/.config/nvim/kiro.nvim",
+    dir = "~/Projects/kiro-cli.nvim",
     name = "kiro.nvim",
     dependencies = { "folke/snacks.nvim" },
     opts = {
-      trust_all_tools = true,
+      trust_all_tools = false,
     },
     keys = {
       {

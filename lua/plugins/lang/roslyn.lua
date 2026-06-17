@@ -1,6 +1,7 @@
 return {
   {
     "seblyng/roslyn.nvim",
+    enabled = false,
     ft = "cs",
     opts = {
       -- Desativa o Razor para evitar os avisos de path não encontrado

@@ -45,7 +45,14 @@ return {
           if vim.bo.filetype == "snacks_dashboard" then
             return
           end
-          require("lspconfig")[server_name].setup({})
+          local opts = {}
+          if server_name == "sqls" then
+            opts.cmd = { "sqls", "-config", vim.fn.expand("~/.config/sqls/config.yml") }
+            opts.root_dir = function(fname)
+              return require("lspconfig.util").root_pattern(".git", "config.yml")(fname) or vim.fs.dirname(fname)
+            end
+          end
+          require("lspconfig")[server_name].setup(opts)
         end,
       },
     },
