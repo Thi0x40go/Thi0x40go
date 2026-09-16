@@ -32,10 +32,6 @@ return {
             },
           },
         },
-        -- Desativa o omnisharp explicitamente para não conflitar com o Roslyn
-        omnisharp = {
-          enabled = false,
-        },
         pyright = {},
         graphql = {},
         sqls = {

@@ -10,11 +10,7 @@ return {
       window = {
         popup = {
           position = { col = "5%", row = "2" },
-          size = function(state)
-            local root_name = vim.fn.fnamemodify(state.path, ":t")
-            local sw = vim.o.columns
-            return { width = math.floor(sw * 0.50), height = "15" }
-          end,
+          size = { width = "50%", height = "15" },
         },
       },
     },

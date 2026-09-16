@@ -11,48 +11,25 @@ return {
         "stylua",
         "shellcheck",
         "shfmt",
-        "flake8",
-        "graphql-language-service-cli",
         "bash-language-server",
         "css-lsp",
-        "debugpy",
-        "deno",
-        "docker-language-server",
-        "dotenv-linter",
         "emmet-language-server",
-        "gitlint",
-        "gofumpt",
-        "gopls",
-        "htmlhint",
         "json-lsp",
-        "jsonlint",
-        "luaformatter",
         "markdownlint",
-        "roslyn",
-        "vscode-spring-boot-tools",
         "typescript-language-server",
-        "sqls",
+        "vtsls",
       },
     },
   },
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      -- Impede que o mason-lspconfig tente encontrar servidores para o dashboard do snacks
-      -- Isso resolve o erro "No LSP servers found for filetype snacks_dashboard"
       handlers = {
         function(server_name)
           if vim.bo.filetype == "snacks_dashboard" then
             return
           end
-          local opts = {}
-          if server_name == "sqls" then
-            opts.cmd = { "sqls", "-config", vim.fn.expand("~/.config/sqls/config.yml") }
-            opts.root_dir = function(fname)
-              return require("lspconfig.util").root_pattern(".git", "config.yml")(fname) or vim.fs.dirname(fname)
-            end
-          end
-          require("lspconfig")[server_name].setup(opts)
+          require("lspconfig")[server_name].setup({})
         end,
       },
     },

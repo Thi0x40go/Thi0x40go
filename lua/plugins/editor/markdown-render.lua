@@ -10,6 +10,9 @@ return {
       checkbox = {
         enabled = false,
       },
+      latex = {
+        enabled = false,
+      },
     },
     ft = { "markdown", "norg", "rmd", "org", "codecompanion" },
     config = function(_, opts)

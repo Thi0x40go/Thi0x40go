@@ -1,3 +1,4 @@
+require("config.remote_clipboard").setup()
 -- Options are automatically loaded before lazy.nvim startup
 -- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
 -- Add any additional options here
@@ -14,23 +15,14 @@ o.relativenumber = false
 vim.g.lazyvim_prettier_needs_config = false
 g.autoformat = false
 
--- Conexões de banco de dados (usado pelo vim-dadbod / LazyVim extra lang.sql)
-g.dbs = {
-  { name = "apphealth-local", url = "postgresql://apphealth:apphealth@localhost:5432/apphealth" },
-}
-
--- Configuração para usar bash interativo e carregar .bashrc/aliases
-o.shell = "/bin/bash"
-o.shellcmdflag = "-ic"
+-- Desativa providers opcionais não usados para inicialização mais rápida e sem avisos
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
+g.loaded_perl_provider = 0
+g.loaded_node_provider = 0
 
 -- Desativa Inlay Hints globalmente (Padrão LazyVim e Neovim)
 vim.g.lazyvim_lsp_inlay_hint = false
-
--- FORÇA BRUTA: Sobrescreve a função de Inlay Hint para não fazer nada
--- Isso impede que erros de 'col: out of range' apareçam na tela
-if vim.lsp.inlay_hint then
-  vim.lsp.inlay_hint.enable = function() end
-end
 
 -- Desativa o texto de erro/aviso que aparece escrito ao lado do código (virtual text)
 vim.diagnostic.config({
@@ -51,7 +43,13 @@ o.fillchars = {
 
 -- Bordas arredondadas para janelas flutuantes (LSP e diagnósticos)
 local border = "rounded"
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border })
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signatureHelp, { border = border })
+vim.lsp.handlers["textDocument/hover"] = function(err, result, ctx, config)
+  local opts = vim.tbl_deep_extend("force", { border = border }, config or {})
+  return vim.lsp.handlers.hover(err, result, ctx, opts)
+end
+vim.lsp.handlers["textDocument/signatureHelp"] = function(err, result, ctx, config)
+  local opts = vim.tbl_deep_extend("force", { border = border }, config or {})
+  return vim.lsp.handlers.signatureHelp(err, result, ctx, opts)
+end
 vim.diagnostic.config({ float = { border = border } })
 

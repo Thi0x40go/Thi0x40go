@@ -1,4 +1,3 @@
-local themes = require("plugins.all-themes")
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
@@ -24,7 +23,6 @@ require("lazy").setup({
     },
     -- import/override with your plugins
     { import = "plugins" },
-    { import = "plugins.ai" },
     { import = "plugins.coding" },
     { import = "plugins.editor" },
     { import = "plugins.formatting" },

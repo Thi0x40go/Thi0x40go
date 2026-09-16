@@ -157,4 +157,17 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePre" }, {
   end,
 })
 
+-- Mata/desconecta todos os servidores LSP (como jdtls/Java) ao fechar o Neovim para evitar processos órfãos
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  desc = "Stop all active LSP clients to prevent orphaned background processes",
+  callback = function()
+    local clients = vim.lsp.get_clients and vim.lsp.get_clients() or vim.lsp.get_active_clients()
+    for _, client in ipairs(clients) do
+      pcall(function()
+        client:stop(true)
+      end)
+    end
+  end,
+})
+
 return M
