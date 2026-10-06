@@ -50,6 +50,22 @@ return {
         "tsx",
         "typescript",
       })
+
+      -- Desativa treesitter em arquivos grandes ou com muitas linhas para evitar lentidão extrema
+      opts.highlight = opts.highlight or {}
+      local orig_disable = opts.highlight.disable
+      opts.highlight.disable = function(lang, buf)
+        if type(orig_disable) == "function" and orig_disable(lang, buf) then
+          return true
+        end
+        local ok, stats = pcall(vim.uv.fs_stat, vim.api.nvim_buf_get_name(buf))
+        if ok and stats and stats.size > (500 * 1024) then
+          return true
+        end
+        if vim.api.nvim_buf_line_count(buf) > 6000 then
+          return true
+        end
+      end
     end,
   },
 }

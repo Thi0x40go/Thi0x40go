@@ -8,22 +8,21 @@ return {
       
       local pos = #opts.dashboard.preset.keys > 0 and #opts.dashboard.preset.keys or 1
       
-      -- Add HTTP deste Projeto
+      -- Add Git Worktree before Quit
       table.insert(opts.dashboard.preset.keys, pos, {
-        icon = "󱂛 ",
-        key = "H",
-        desc = "HTTP deste Projeto",
-        action = ":lua require('util.quick_request').open_project_http()",
+        icon = "󰙅 ",
+        key = "w",
+        desc = "Git Worktrees",
+        action = function()
+          require("telescope").load_extension("git_worktree")
+          local ext = require("telescope").extensions.git_worktree
+          if ext.git_worktree then
+            ext.git_worktree()
+          elseif ext.git_worktrees then
+            ext.git_worktrees()
+          end
+        end,
       })
-
-      -- Add Dbee before the Quit option (usually the last one)
-      table.insert(opts.dashboard.preset.keys, pos + 1, {
-        icon = " ",
-        key = "D",
-        desc = "Banco de Dados (Dbee)",
-        action = ":lua require('dbee').toggle()",
-      })
-
     end,
   }
 }

@@ -1,16 +1,12 @@
 # 🚀 Manual de Elite - Neovim
 
-### 🤖 Inteligência Artificial (Gemini & Kiro)
-*IA observando seu código em tempo real.*
-- `<leader>ag` : **Gemini** (Flutuante)
-- `<leader>ak` : **Kiro CLI** (Flutuante - Novo Plugin Nativo)
-- `<leader>ah` : Gemini (Horizontal)
-- `<leader>av` : Gemini (Vertical)
-- `<leader>Ai` : **Liga/Desliga** o auto-completar da IA (Ollama/Qwen)
-- `Alt + y`    : **Aceitar** sugestão da IA (Texto cinza)
-- `Alt + n/p`  : Ver **Próxima / Anterior** sugestão
-- `Alt + e`    : **Ignorar** sugestão
-- *Dica:* No chat, pergunte: "Como este método funciona?" ou "Refatore a seleção".
+### 🤖 Inteligência Artificial (Agentic & Kiro ACP)
+*IA conversacional integrada ao editor para entender e analisar código.*
+- `<leader>ak` ou `Ctrl + \` : **Abrir/Fechar Chat Agentic** (Kiro CLI via ACP)
+- `<leader>ac` : **Adicionar ao Contexto** (Envia o arquivo ou bloco selecionado para a IA)
+- `<leader>an` : **Nova Sessão** de Chat
+- *Dentro do chat:* `<leader>m` para trocar modelo, `<leader>s` para trocar provider, `q` para fechar
+- *Dica:* Selecione um método com `V`, aperte `<leader>ac` e pergunte: "Explique o que este método faz".
 
 ### ☕ Java & Kotlin (IntelliJ Style)
 - `<leader>jn` : **Novo Arquivo** (Gera o `package` automático baseado na pasta)
@@ -44,17 +40,24 @@
 - `<leader>Rg` : **Baixar Schema GraphQL** (Habilita autocomplete em queries)
 - `<leader>Re` : **Mudar Ambiente** (Trocar entre Local, Dev, Prod)
 
-### 🗄️ Banco de Dados & Docker
-- `<leader>D`  : **Gaveta de Dados** (Conecte em Postgres, MySQL, SQL Server)
+### 🐳 Docker
 - `<leader>ad` : **Lazydocker** (Gerencie containers, logs e volumes visualmente)
 
 ### 🌲 Git & Outros
-- `<leader>gd` : Abrir Visão de **Diff**
-- `<leader>gD` : Fechar Visão de Diff
-- `<leader>ua` : **Ligar/Desligar Auto-Save** (Salva arquivos automaticamente ao digitar)
-- `<leader>qs` : **Restaurar Sessão** (Abre as últimas abas e arquivos que você fechou)
-- `<leader>fp" : **Mudar de Projeto** (Abre a lista de projetos detectados)
-- `<leader>?`  : **Este Guia**
+- `<leader>gd`  : Abrir Visão de **Diff** (Alterações locais)
+- `<leader>gdm` : **Diff com origin/develop** (Preview exato de PR / Merge)
+- `<leader>gdc` : **Commits da Branch** (Lista commits exclusivos estilo GitLab)
+- `<leader>gD`  : Fechar Visão de Diff
+- `<leader>gws` : **Listar / Trocar Worktree** (Alterna entre worktrees do Git)
+- `<leader>gwc` : **Criar Worktree** (Cria nova branch/pasta worktree)
+- `<leader>uB`  : **Git Blame Inline** (Liga/desliga histórico ao lado da linha)
+- `<leader>ghp` : **Preview Alteração Inline** (Mostra o que foi alterado na linha)
+- `<leader>ghb` : **Popup de Blame** (Autor, data e commit detalhados da linha)
+- `]h` / `[h`   : **Próxima / Anterior alteração** no arquivo
+- `<leader>ua`  : **Ligar/Desligar Auto-Save** (Salva arquivos automaticamente ao digitar)
+- `<leader>qs`  : **Restaurar Sessão** (Abre as últimas abas e arquivos que você fechou)
+- `<leader>fp` ou `<leader>pp` : **Mudar de Projeto** (Abre a lista de projetos detectados)
+- `<leader>?`   : **Este Guia**
 
 ### 📓 Obsidian (Anotações)
 - `<leader>os` : **Procurar Notas**

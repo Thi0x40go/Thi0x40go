@@ -12,6 +12,7 @@ return {
     end,
     keys = {
       { "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Procurar Projetos (Telescope)" },
+      { "<leader>pp", "<cmd>Telescope projects<cr>", desc = "Procurar Projetos (Telescope)" },
     },
   },
 }

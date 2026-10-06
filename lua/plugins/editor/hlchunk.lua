@@ -5,6 +5,11 @@ return {
     require("hlchunk").setup({
       chunk = {
         enable = true,
+        max_file_size = 256 * 1024, -- Desativa em arquivos > 256KB para evitar lag
+        exclude_filetypes = {
+          bigfile = true,
+          snacks_dashboard = true,
+        },
         priority = 15,
         style = {
           { fg = "#806d9c" }, -- Cor vibrante para o escopo
@@ -23,21 +28,19 @@ return {
       },
       indent = {
         enable = true,
+        max_file_size = 256 * 1024,
+        exclude_filetypes = {
+          bigfile = true,
+          snacks_dashboard = true,
+        },
         priority = 10,
         chars = {
           "│", -- Caractere limpo para indentação normal
         },
-        -- style = {
-        --   "#E06C75",
-        --   "#E5C07B",
-        --   "#98C379",
-        --   "#56B6C2",
-        --   "#61AFEF",
-        --   "#C678DD",
-        -- },
       },
       line_num = {
         enable = true,
+        max_file_size = 256 * 1024,
         style = "#C678DD",
         priority = 20,
       },

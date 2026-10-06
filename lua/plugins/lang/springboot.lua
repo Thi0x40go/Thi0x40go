@@ -2,6 +2,7 @@ return {
   -- Plugin para suporte visual ao Spring Boot
   {
     "JavaHello/spring-boot.nvim",
+    ft = { "java" },
     dependencies = {
       "neovim/nvim-lspconfig",
       "nvim-telescope/telescope.nvim",
@@ -105,12 +106,39 @@ return {
         vim.list_extend(opts.init_options.bundles, spring_bundles)
       end
 
-      -- 3. Habilita diagnósticos avançados e validação Spring
+      -- 3. Detecção precisa da raiz do projeto Java (evita iniciar no $HOME ou em projetos sem Java)
+      opts.root_dir = function(path)
+        if not path or path == "" then
+          return nil
+        end
+        local java_markers = { "mvnw", "gradlew", "pom.xml", "build.gradle", "build.gradle.kts", "settings.gradle" }
+        local root = vim.fs.root(path, java_markers)
+        if not root and (path:find("/src/") or path:match("%.java$")) then
+          root = vim.fs.root(path, { ".git" })
+        end
+        if root == vim.env.HOME or root == "/" then
+          return nil
+        end
+        return root
+      end
+
+      -- 4. Workspace isolado por projeto e worktree (evita conflitos e corrupção de cache entre worktrees)
+      opts.project_name = function(root_dir)
+        if not root_dir then return nil end
+        local basename = vim.fs.basename(root_dir)
+        local hash = vim.fn.sha256(root_dir):sub(1, 8)
+        return basename .. "-" .. hash
+      end
+
+      -- 5. Habilita diagnósticos avançados, validação Spring e otimização de performance
       opts.settings = opts.settings or {}
-      opts.settings.java = opts.settings.java or {}
-      opts.settings.java.errors = {
-        incompleteClasspath = { severity = "warning" },
-      }
+      opts.settings.java = vim.tbl_deep_extend("force", opts.settings.java or {}, {
+        errors = {
+          incompleteClasspath = { severity = "warning" },
+        },
+        autobuild = { enabled = false }, -- Compila ao salvar em vez de travar a cada caractere
+        signatureHelp = { enabled = true },
+      })
       
       -- Configurações específicas do Spring Boot LS
       opts.settings["spring-boot"] = {

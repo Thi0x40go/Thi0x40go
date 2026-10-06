@@ -12,6 +12,7 @@ o.spell = true
 o.swapfile = false
 o.wrap = true
 o.relativenumber = false
+o.synmaxcol = 300 -- Não analisa sintaxe além da coluna 300 em linhas longas (evita travamento com arquivos minificados/long lines)
 vim.g.lazyvim_prettier_needs_config = false
 g.autoformat = false
 
@@ -39,6 +40,7 @@ o.fillchars = {
   vertright = "├",
   verthoriz = "┼",
   eob = " ", -- Esconde o ~ no final do buffer
+  diff = "╱", -- Linhas de preenchimento do diff estilo VS Code / Diffview README (Issue #546)
 }
 
 -- Bordas arredondadas para janelas flutuantes (LSP e diagnósticos)
@@ -53,3 +55,9 @@ vim.lsp.handlers["textDocument/signatureHelp"] = function(err, result, ctx, conf
 end
 vim.diagnostic.config({ float = { border = border } })
 
+-- Diff moderno: destaca palavras dentro da linha (intra-line diff) e usa algoritmo histogram
+o.diffopt:append({
+  "algorithm:histogram",
+  "indent-heuristic",
+  "linematch:60",
+})

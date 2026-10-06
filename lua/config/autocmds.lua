@@ -30,117 +30,64 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 
-vim.api.nvim_create_autocmd("BufReadPost", {
-  callback = function()
-    local line = vim.api.nvim_buf_get_lines(0, 0, 1, false)[1]
-    if line and #line > 5000 then
-      vim.cmd("syntax off")
-      pcall(vim.cmd, "TSBufDisable highlight")
-      vim.opt_local.wrap = false
-      print("⚡ Arquivo minificado detectado: highlight desativado")
+-- ==============================================================================
+-- Otimização para Arquivos Longos / Pesados (Long Lines & Big Files)
+-- ==============================================================================
+local large_file_group = vim.api.nvim_create_augroup("LargeFileOptimization", { clear = true })
+
+vim.api.nvim_create_autocmd({ "BufReadPre", "BufReadPost" }, {
+  group = large_file_group,
+  callback = function(ev)
+    local buf = ev.buf
+    local file = ev.file or vim.api.nvim_buf_get_name(buf)
+
+    -- Verifica tamanho físico do arquivo (> 800 KB)
+    local is_large = false
+    if file and file ~= "" then
+      local ok, stat = pcall(vim.uv.fs_stat, file)
+      if ok and stat and stat.size > (800 * 1024) then
+        is_large = true
+      end
+    end
+
+    -- Se não for grande pelo tamanho, verifica se tem muitas linhas (> 5000 linhas)
+    -- ou se tem linhas extremamente longas (> 1500 caracteres, ex: JSON/JS minificado)
+    if not is_large and ev.event == "BufReadPost" then
+      local line_count = vim.api.nvim_buf_line_count(buf)
+      if line_count > 5000 then
+        is_large = true
+      else
+        -- Amostra as primeiras 50 linhas para detectar minificação ou linhas longas
+        local lines = vim.api.nvim_buf_get_lines(buf, 0, math.min(line_count, 50), false)
+        for _, l in ipairs(lines) do
+          if #l > 1500 then
+            is_large = true
+            break
+          end
+        end
+      end
+    end
+
+    if is_large then
+      vim.b[buf].is_large_file = true
+      vim.opt_local.wrap = false -- Desativa quebra de linha (evita travamento de renderização)
+      vim.opt_local.foldmethod = "manual" -- Desativa cálculo recursivo de dobras
+      vim.opt_local.statuscolumn = "" -- Desativa renderização de colunas pesadas
+      vim.opt_local.cursorline = false -- Desativa highlight de linha atual
+      vim.opt_local.relativenumber = false
+      vim.opt_local.swapfile = false
+      vim.b[buf].completion = false -- Desativa auto-complete no buffer
+      
+      -- Desativa Treesitter highlight para este buffer
+      pcall(vim.treesitter.stop, buf)
+      
+      -- Desativa NoMatchParen se disponível
+      if vim.fn.exists(":NoMatchParen") ~= 0 then
+        pcall(vim.cmd, "NoMatchParen")
+      end
     end
   end,
 })
-
--- Create a new autocommand group for large file optimizations
-local group = vim.api.nvim_create_augroup("LargeFileAutocmds", {})
--- Variable to store the previous state of eventignore
-local old_eventignore = false
-
--- Default settings for handling large files
-local default_settings = {
-  size_limit = 4 * 1024 * 1024, -- 4 MB size limit for a file to be considered large
-  buffer_options = { -- Buffer options to apply for large files
-    swapfile = false, -- Disable swapfile for large files
-    bufhidden = "unload", -- Unload buffer when hidden
-    buftype = "nowrite", -- Set buffer type to nowrite
-    undolevels = -1, -- Disable undo levels
-  },
-  on_large_file_read_pre = function(ev) end, -- Placeholder for a callback before reading a large file
-}
-
--- Settings variable that will be configured by the user or default settings
-local settings = {}
-
--- Function to handle BufReadPre event
-local buf_read_pre = function(ev)
-  if ev.file then
-    local status, size = pcall(function()
-      return vim.loop.fs_stat(ev.file).size
-    end)
-    if status and size > settings.size_limit then
-      old_eventignore = vim.o.eventignore -- Store the current eventignore setting
-      vim.b[ev.buf].is_large_file = true -- Mark buffer as containing a large file
-      vim.o.eventignore = "FileType" -- Ignore FileType events to optimize performance
-      for option, value in pairs(settings.buffer_options) do
-        vim.bo[option] = value -- Apply buffer options for large files
-      end
-      settings.on_large_file_read_pre(ev) -- Invoke callback for large file read pre-event
-    end
-  end
-end
-
--- Function to handle BufWinEnter event
-local buf_win_enter = function(ev)
-  if old_eventignore ~= false then
-    vim.o.eventignore = old_eventignore -- Restore the eventignore setting
-    old_eventignore = false
-  end
-  if vim.b[ev.buf].is_large_file then
-    vim.wo.wrap = false -- Disable line wrapping for large files
-  else
-    vim.wo.wrap = vim.o.wrap -- Restore line wrapping setting
-  end
-end
-
--- Function to handle BufEnter event
-local buf_enter = function(ev)
-  if vim.b[ev.buf].is_large_file then
-    if vim.g.loaded_matchparen then
-      vim.cmd("NoMatchParen") -- Disable matching parentheses highlighting for large files
-    end
-  else
-    if not vim.g.loaded_matchparen then
-      vim.cmd("DoMatchParen") -- Enable matching parentheses highlighting
-    end
-  end
-end
-
--- Module table
-M = {}
-
--- Setup function to configure the module
-M.setup = function(opts)
-  if opts == nil then
-    opts = {}
-  end
-
-  for __, option in ipairs({ "size_limit", "buffer_options", "on_large_file_read_pre" }) do
-    if opts[option] == nil then
-      settings[option] = default_settings[option] -- Use default setting if not provided
-    else
-      settings[option] = opts[option] -- Use provided setting
-    end
-  end
-
-  -- Create autocommands for the specified events
-  vim.api.nvim_create_autocmd({ "BufReadPre" }, {
-    group = group,
-    callback = buf_read_pre,
-  })
-
-  vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
-    group = group,
-    callback = buf_win_enter,
-  })
-
-  vim.api.nvim_create_autocmd({ "BufEnter" }, {
-    group = group,
-    callback = buf_enter,
-  })
-end
-
--- Return the module table
 -- C# BOM Fix: Remove <feff> (Byte Order Mark) automaticamente
 vim.api.nvim_create_autocmd({ "BufReadPost", "BufWritePre" }, {
   pattern = "*.cs",
@@ -170,4 +117,4 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
   end,
 })
 
-return M
+return {}
